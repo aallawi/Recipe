@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.background {
+    background: linear-gradient(0deg, #f5f9ee 0%, #f5f9ee 50%, #f8da5b 50%, #f8da5b 100%);
+}
+
+.clip  {
+    position: absolute;
+    bottom: 49%;
+    left: 0;
+    /* clip-path: polygon(50% 95%, 100% 0%, 100% 100%, 0% 100%, 0% 0%); */
+    clip-path: polygon(50% 95%, 101% 0%, 100% 100%, 0% 100%, -1% 0%);
+    background-color: #f5f9ee;
+    width: 100%;
+    height: 20%;
+}
+
+.btn-default, .btn-border {
+    padding: 8px 20px;
+    font-size: 18px;
+    transition: all ease-in-out 300ms;
+}
+
+.btn-default {
+    background-color: #247291;
+    color: white;
+}
+.btn-default:hover {
+    background-color: #164f66;
+    color: white;
+}
+.btn-border {
+    border: solid 2px #247291;
+    color: #247291;
+}
+.btn-border {
+    border: solid 2px #247291;
+    color: #247291;
+}
+.btn-border:hover {
+    background-color: #247291;
+    color: white;
+}
