@@ -9,6 +9,13 @@
     box-sizing: border-box;
 }
 
+.one_line {   
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 .background {
     background: linear-gradient(0deg, #f5f9ee 0%, #f5f9ee 50%, #f8da5b 50%, #f8da5b 100%);

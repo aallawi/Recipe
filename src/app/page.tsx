@@ -27,7 +27,7 @@ export default function Home() {
 
         </p>
         <div className="mt-[40px] flex justify-center items-center gap-[50px]">
-          <button className="btn-default"><Link href="menu">View Menu</Link></button>
+          <button className="btn-default"><Link href="meals">View Meals</Link></button>
           <button className="btn-border"><Link href="favorite">My Favorites</Link></button>
         </div>
       </div>
