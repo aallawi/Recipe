@@ -6,6 +6,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FadeLoader } from "react-spinners";
+import { IoSearchOutline } from "react-icons/io5";
 import "../../../style/globals.css"
 
 interface Category {
@@ -26,7 +27,6 @@ function Meals() {
     // Categories
     const getCategories = async () => {
         const { data } = await axios.get("https://www.themealdb.com/api/json/v1/1/categories.php");
-        console.log("getCategories");
         return data.categories;
     };
 
@@ -100,11 +100,15 @@ function Meals() {
 
     return (
         <div className="max-w-[1200px] mx-auto px-[20px] md:px-[40px] pt-[40px]">
-            <input
-                value={searchText}
-                className=" w-full max-w-[600px] mx-auto border-[2px] border-secondary rounded-md mb-[20px] h-[40px] outline-none px-[10px] text-[17px]"
-                onChange={(e) => setSearchText(e.target.value)}
-            />
+            <div className="flex items-center bg-white my-[20px] rounded-[20px] border border-primary pl-[12px] h-[40px]">
+                <IoSearchOutline size={25} />
+                <input
+                    value={searchText}
+                    className="w-full px-[10px] mr-[10px] outline-none text-[16px]"
+                    // className=" w-full max-w-[600px] mx-auto border-[2px] border-secondary rounded-md mb-[20px] h-[40px] outline-none px-[10px] text-[17px]"
+                    onChange={(e) => setSearchText(e.target.value)}
+                />
+            </div>
             <div className=" grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 justify-center flex-wrap gap-[10px] pb-[50px]">
                 {categories?.map((item, index) => (
                     <div key={index}
