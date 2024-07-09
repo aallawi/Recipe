@@ -105,7 +105,6 @@ function Meals() {
                 <input
                     value={searchText}
                     className="w-full px-[10px] mr-[10px] outline-none text-[16px]"
-                    // className=" w-full max-w-[600px] mx-auto border-[2px] border-secondary rounded-md mb-[20px] h-[40px] outline-none px-[10px] text-[17px]"
                     onChange={(e) => setSearchText(e.target.value)}
                 />
             </div>
@@ -134,18 +133,33 @@ function Meals() {
                 </div>
             )}
 
-            <div className=" grid grid-cols-2 md:grid-cols-4 gap-[20px] pb-[50px]">
+            <div className=" flex flex-wrap justify-center items-center gap-x-[40px] gap-y-[60px] md:gap-y-[80px] pb-[50px]">
                 {mealsByChosen?.map((meal) => (
-                    <Link key={meal.idMeal} href={`/meals/${meal.idMeal}`} className=" p-[15px] bg-stone-200 rounded-md">
-                        <Image src={meal.strMealThumb} height="380" width="380" className="bg-cover rounded-md" alt={meal.strMeal} />
-                        <h2 className="pt-[20px] text-[16px] font-[600] one_line">{meal.strMeal}</h2>
+
+                    <Link key={meal.idMeal} href={`/meals/${meal.idMeal}`}>
+                        <div className="relative w-[250px] h-[250px]">
+                            <Image src="/images/bottom-right.png" height="60" width="60" className="absolute bottom-[-5px] left-[-15px] z-10 " alt="Top left decoration" />
+                            <span className="absolute h-[250px] w-[250px] left-0 top-0 rotate-[5deg] bg-[#dad6cf] border border-[#c2b59d]" />
+                            <div className="absolute h-[250px] w-[250px] flex justify-center items-center bg-[#dad6cf] border border-[#c2b59d]">
+                                <Image src={meal.strMealThumb} height="230" width="230" className="bg-cover" alt={meal.strMeal} />
+                            </div>
+                            <Image src="/images/top-left.png" height="60" width="60" className="absolute top-[-5px] right-[-15px] z-10 " alt="Top left decoration" />
+                        </div>
+                        <h2 className="one_line text-[16px] mt-[15px] py-[10px] pl-[10px] leading-[35px] font-[600] w-[250px] bg-primary">{meal.strMeal}</h2>
                     </Link>
                 ))}
 
                 {mealsByQuery?.map((meal) => (
-                    <Link key={meal.idMeal} href={`/meals/${meal.idMeal}`} className=" p-[15px] bg-stone-200 rounded-md">
-                        <Image src={meal.strMealThumb} height="380" width="380" className="bg-cover rounded-md" alt={meal.strMeal} />
-                        <h2 className="pt-[20px] text-[16px] font-[600] one_line">{meal.strMeal}</h2>
+                    <Link key={meal.idMeal} href={`/meals/${meal.idMeal}`} className="">
+                        <div className="relative w-[250px] h-[250px]">
+                            <Image src="/images/bottom-right.png" height="60" width="60" className="absolute bottom-[-5px] left-[-15px] z-10 " alt="Top left decoration" />
+                            <span className="absolute h-[250px] w-[250px] left-0 top-0 rotate-[5deg] bg-[#dad6cf] border border-[#c2b59d]" />
+                            <div className="absolute h-[250px] w-[250px] flex justify-center items-center bg-[#dad6cf] border border-[#c2b59d]">
+                                <Image src={meal.strMealThumb} height="230" width="230" className="bg-cover" alt={meal.strMeal} />
+                            </div>
+                            <Image src="/images/top-left.png" height="60" width="60" className="absolute top-[-5px] right-[-15px] z-10 " alt="Top left decoration" />
+                        </div>
+                        <h2 className="one_line text-[16px] mt-[15px] py-[10px] pl-[10px] leading-[35px] font-[600] w-[250px] bg-primary">{meal.strMeal}</h2>
                     </Link>
                 ))}
             </div>

@@ -17,7 +17,7 @@ const config: Config = {
           DEFAULT: "#247291",
           hover: "#164f66",
         },
-        body: "#f5f9ee",
+        body: "#f7f6f2",
       },
       screens: {
         sm: "640px",
