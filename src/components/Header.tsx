@@ -2,7 +2,8 @@
 import { FC } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { MdFastfood, MdFavorite } from 'react-icons/md';
+import { MdFastfood } from 'react-icons/md';
+import { FaStar } from "react-icons/fa6";
 
 const Header: FC = () => {
     const pathname = usePathname();
@@ -24,7 +25,7 @@ const Header: FC = () => {
                     </Link>
                     <Link href="/favorite">
                         <div className={`flex items-center gap-2 text-[16px] h-[34px] px-[15px] py-[2px] rounded-sm ${pathname === '/favorite' ? 'bg-primary text-secondary border border-b-[5px] border-secondary' : 'bg-secondary text-white  border-secondary'}`}>
-                            <MdFavorite />
+                            <FaStar />
                             <span>Favorite</span>
                         </div>
                     </Link>
