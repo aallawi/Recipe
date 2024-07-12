@@ -6,8 +6,8 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FadeLoader } from "react-spinners";
 import { IoSearchOutline } from "react-icons/io5";
-import OneMeal from "../../components/OneMeal"
-import "../../../style/globals.css"
+import OneMeal from "../../components/OneMeal";
+import "../../../style/globals.css";
 
 interface Category {
     strCategory: string;
@@ -25,7 +25,7 @@ function Menu() {
     const [query, setQuery] = useState<string>("");
 
     // Categories
-    const getCategories = async () => {
+    const getCategories = async (): Promise<Category[]> => {
         const { data } = await axios.get("https://www.themealdb.com/api/json/v1/1/categories.php");
         return data.categories;
     };
@@ -41,8 +41,8 @@ function Menu() {
     });
 
     // Meals By Category
-    const getMealsByCategory = async ({ queryKey }: { queryKey: [string, string] }) => {
-        const { data } = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${queryKey[1]}`);
+    const getMealsByCategory = async (category: string): Promise<Meal[]> => {
+        const { data } = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
         return data?.meals || [];
     };
 
@@ -50,15 +50,15 @@ function Menu() {
         data: mealsByChosen,
         isLoading: loadingByChosen,
         isError: errorByChosen,
-    } = useQuery<Meal[]>({
+    } = useQuery<Meal[], Error>({
         queryKey: ["mealsByCategory", selectedCategory],
-        queryFn: getMealsByCategory,
+        queryFn: ({ queryKey }) => getMealsByCategory(queryKey[1] as string),
         enabled: query === "",
     });
 
     // Meals By Query
-    const getMealsByQuery = async ({ queryKey }: { queryKey: [string, string] }) => {
-        const { data } = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${queryKey[1]}`);
+    const getMealsByQuery = async (query: string): Promise<Meal[]> => {
+        const { data } = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
         return data?.meals || [];
     };
 
@@ -66,9 +66,9 @@ function Menu() {
         data: mealsByQuery,
         isLoading: loadingByQuery,
         isError: errorByQuery,
-    } = useQuery<Meal[]>({
+    } = useQuery<Meal[], Error>({
         queryKey: ["mealsByQuery", query],
-        queryFn: getMealsByQuery,
+        queryFn: ({ queryKey }) => getMealsByQuery(queryKey[1] as string),
         enabled: query !== "",
     });
 
@@ -78,7 +78,6 @@ function Menu() {
         setQuery("");
         setSearchText("");
     }
-
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -95,7 +94,6 @@ function Menu() {
         };
     }, [searchText, categories]);
 
-
     return (
         <div className="max-w-[1200px] mx-auto px-[20px] md:px-[40px] pt-[40px]">
             <div className="flex items-center bg-white my-[20px] rounded-[20px] border border-[#c2b59d] pl-[12px] h-[40px]">
@@ -106,7 +104,7 @@ function Menu() {
                     onChange={(e) => setSearchText(e.target.value)}
                 />
             </div>
-            <div className=" grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 justify-center flex-wrap gap-[10px]">
+            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 justify-center flex-wrap gap-[10px]">
                 {categories?.map((item, index) => (
                     item.strCategory === "Pork" ? null : (
                         <div
@@ -118,7 +116,6 @@ function Menu() {
                         </div>
                     )
                 ))}
-
             </div>
 
             {categoryIsLoading || loadingByChosen && (
@@ -140,7 +137,7 @@ function Menu() {
                 </div>
             )}
 
-            <div className=" flex flex-wrap justify-center items-center gap-x-[40px] gap-y-[60px] md:gap-y-[80px] pb-[50px]">
+            <div className="flex flex-wrap justify-center items-center gap-x-[40px] gap-y-[60px] md:gap-y-[80px] pb-[50px]">
                 {mealsByChosen?.map((meal) => (
                     <OneMeal key={meal.idMeal} meal={meal} />
                 ))}
@@ -153,7 +150,6 @@ function Menu() {
             {mealsByChosen?.length === 0 && mealsByQuery?.length === 0 && (
                 <p className="text-red-900 text-[40px] text-center pb-[30px]">No meals found</p>
             )}
-
         </div>
     );
 }
