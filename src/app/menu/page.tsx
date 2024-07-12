@@ -20,9 +20,16 @@ interface Meal {
 }
 
 function Menu() {
-    const [selectedCategory, setSelectedCategory] = useState<string>(localStorage.getItem("Category") || "");
+    const [selectedCategory, setSelectedCategory] = useState<string>("");
     const [searchText, setSearchText] = useState<string>("");
     const [query, setQuery] = useState<string>("");
+
+    useEffect(() => {
+        const storedCategory = localStorage.getItem("Category");
+        if (storedCategory) {
+            setSelectedCategory(storedCategory);
+        }
+    }, []);
 
     // Categories
     const getCategories = async (): Promise<Category[]> => {
@@ -89,10 +96,9 @@ function Menu() {
             }
         }, 300);
         return () => {
-            setQuery("");
             clearTimeout(timeout);
         };
-    }, [searchText, categories]);
+    }, [searchText]);
 
     return (
         <div className="max-w-[1200px] mx-auto px-[20px] md:px-[40px] pt-[40px]">

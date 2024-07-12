@@ -11,7 +11,7 @@ import { VscDebugBreakpointData } from "react-icons/vsc";
 import { BsPinMapFill } from "react-icons/bs";
 import { MdCategory } from "react-icons/md";
 import { IoMdPricetags } from "react-icons/io";
-import "../../../../style/globals.css"
+import "../../../../style/globals.css";
 
 interface Meal {
     idMeal: string;
@@ -52,31 +52,27 @@ const SingleMeal: FC = () => {
 
     const savedMeal = (id: string, saveOrNot: boolean) => {
         setIsSaved(saveOrNot);
-        const savedMeals = localStorage.getItem('savedMeals');
-        if (savedMeals) {
-            const parsedSavedMeals: string[] = JSON.parse(savedMeals);
-            if (saveOrNot) {
-                parsedSavedMeals.push(id);
-                localStorage.setItem('savedMeals', JSON.stringify(parsedSavedMeals));
+        if (typeof window !== "undefined") {
+            const savedMeals = localStorage.getItem('savedMeals');
+            if (savedMeals) {
+                const parsedSavedMeals: string[] = JSON.parse(savedMeals);
+                if (saveOrNot) {
+                    parsedSavedMeals.push(id);
+                    localStorage.setItem('savedMeals', JSON.stringify(parsedSavedMeals));
+                } else {
+                    const updatedMeals = parsedSavedMeals.filter(mealId => mealId !== id);
+                    localStorage.setItem('savedMeals', JSON.stringify(updatedMeals));
+                }
             } else {
-                const updatedMeals = parsedSavedMeals.filter(mealId => mealId !== id);
-                localStorage.setItem('savedMeals', JSON.stringify(updatedMeals));
+                localStorage.setItem('savedMeals', JSON.stringify(saveOrNot ? [id] : []));
             }
-        } else {
-            localStorage.setItem('savedMeals', JSON.stringify(saveOrNot ? [id] : []));
         }
     };
 
     useEffect(() => {
-        if (localStorage.getItem('savedMeals')) {
+        if (typeof window !== "undefined") {
             const savedMeals: string[] = JSON.parse(localStorage.getItem('savedMeals') || '[]');
-            if (savedMeals.includes(id.toString())) {
-                setIsSaved(true);
-            } else {
-                setIsSaved(false);
-            }
-        } else {
-            localStorage.setItem('savedMeals', JSON.stringify([]));
+            setIsSaved(savedMeals.includes(id.toString()));
         }
     }, [id]);
 
@@ -214,8 +210,7 @@ const SingleMeal: FC = () => {
                         </div>
                     )}
                 </div>
-            )
-            }
+            )}
 
             {isLoading && (
                 <div className="flex justify-center pb-[50px]">
