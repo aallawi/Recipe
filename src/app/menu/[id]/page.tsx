@@ -38,14 +38,14 @@ const SingleMeal: FC = () => {
     const [isSaved, setIsSaved] = useState<boolean>(false);
     const [ingredientsWithMeasures, setIngredientsWithMeasures] = useState<IngredientWithMeasure[]>([]);
 
-    const getSingleMeal = async (id: string): Promise<Meal | undefined> => {
+    const getMeal = async (id: string): Promise<Meal | undefined> => {
         const { data } = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
         return data?.meals?.[0];
     };
 
     const options = {
-        queryKey: ["getSingleMeal", id as string],
-        queryFn: () => getSingleMeal(id as string),
+        queryKey: ["getMeal", id as string],
+        queryFn: () => getMeal(id as string),
     };
 
     const { data, isLoading, isError }: UseQueryResult<Meal | undefined> = useQuery(options);
@@ -160,11 +160,11 @@ const SingleMeal: FC = () => {
 
                             {/* btn favorite */}
                             {isSaved ? (
-                                <button className="flex items-center justify-center gap-[6px] h-[45px] w-fit px-[20px] bg-primary border border-black" onClick={() => savedMeal(id, false)} >
+                                <button className="flex items-center justify-center gap-[6px] h-[45px] w-fit px-[20px] bg-primary border border-black" onClick={() => savedMeal(data.idMeal, false)} >
                                     <FaStar /> <span>Remove from favorite meals</span>
                                 </button>
                             ) : (
-                                <button className="flex items-center justify-center gap-[6px] btn-default h-[45px] w-fit px-[20px]" onClick={() => savedMeal(id, true)} >
+                                <button className="flex items-center justify-center gap-[6px] btn-default h-[45px] w-fit px-[20px]" onClick={() => savedMeal(data.idMeal, true)} >
                                     <FaStar /> <span>Add to favorite meals</span>
                                 </button>
                             )}

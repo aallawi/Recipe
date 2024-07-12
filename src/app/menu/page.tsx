@@ -108,12 +108,17 @@ function Menu() {
             </div>
             <div className=" grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 justify-center flex-wrap gap-[10px]">
                 {categories?.map((item, index) => (
-                    <div key={index}
-                        className={`${item.strCategory === selectedCategory ? "bg-primary text-secondary font-[700] border-b-[2px] border-r-[2px] border-secondary " : "bg-secondary text-white"} text-center rounded-md px-[20px] py-[10px] border-b-[2px] text-[18px] cursor-pointer`}
-                        onClick={() => { HandelSelectedCategory(item.strCategory) }} >
-                        {item.strCategory}
-                    </div>
+                    item.strCategory === "Pork" ? null : (
+                        <div
+                            key={index}
+                            className={`${item.strCategory === selectedCategory ? "bg-primary text-secondary font-[700] border-b-[2px] border-r-[2px] border-secondary" : "bg-secondary text-white"} text-center rounded-md px-[20px] py-[10px] border-b-[2px] text-[18px] cursor-pointer`}
+                            onClick={() => { HandelSelectedCategory(item.strCategory) }}
+                        >
+                            {item.strCategory}
+                        </div>
+                    )
                 ))}
+
             </div>
 
             {categoryIsLoading || loadingByChosen && (
