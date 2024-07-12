@@ -1,6 +1,7 @@
 "use client";
 import { FC } from 'react';
 import Link from 'next/link';
+import Image from "next/image";
 import { usePathname } from 'next/navigation';
 import { MdFastfood } from 'react-icons/md';
 import { FaStar } from "react-icons/fa6";
@@ -9,12 +10,13 @@ const Header: FC = () => {
     const pathname = usePathname();
 
     return (
-        <div className='bg-body'>
+        <div className="bg-primary">
             <div className="flex justify-between items-center max-w-[1200px] mx-auto px-[20px] md:px-[40px]">
-                <div className="text-[35px] md:text-[40px] font-bold text-secondary">
+                <div className="text-[35px] flex md:text-[40px] font-bold text-secondary">
                     <Link href="/">
                         <h2>Recipe</h2>
                     </Link>
+                    <Image src="/images/spoon-and-fork.svg" className="mx-auto" alt="spoon and fork" width={40} height={40} />
                 </div>
                 <div className="flex gap-[5px] md:gap-[20px]">
                     <Link href="/menu">

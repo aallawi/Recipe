@@ -30,12 +30,12 @@ export default function Favorite() {
         setIsLoading(false);
     }, []);
 
-    const getMeal = async (id: string): Promise<Meal | undefined> => {
+    const getMeal = async (id: string): Promise<Meal> => {
         const { data } = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
         return data?.meals?.[0];
     };
 
-    const queries: UseQueryOptions<Meal>[] = savedMealsIds.map((id) => ({
+    const queries: UseQueryOptions<Meal, Error>[] = savedMealsIds.map((id) => ({
         queryKey: ["getMeal", id],
         queryFn: () => getMeal(id),
     }));
