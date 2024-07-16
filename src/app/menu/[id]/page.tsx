@@ -12,25 +12,8 @@ import { BsPinMapFill } from "react-icons/bs";
 import { MdCategory } from "react-icons/md";
 import { IoMdPricetags } from "react-icons/io";
 import "../../../../style/globals.css";
+import { Meal, IngredientWithMeasure } from "../../../types/index"
 
-interface Meal {
-    idMeal: string;
-    strMeal: string;
-    strMealThumb: string;
-    strInstructions: string;
-    strArea: string;
-    strCategory: string;
-    strTags?: string;
-    strSource?: string;
-    strYoutube?: string;
-    [key: string]: any;
-}
-
-interface IngredientWithMeasure {
-    index: number;
-    ingredient: string;
-    measure: string;
-}
 
 const SingleMeal: FC = () => {
     const params = useParams();

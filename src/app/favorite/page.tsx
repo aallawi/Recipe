@@ -5,19 +5,8 @@ import { useQueries, UseQueryResult } from "@tanstack/react-query";
 import axios from "axios";
 import OneMeal from "@/components/OneMeal";
 import { FadeLoader } from "react-spinners";
+import { Meal } from "../../types/index.ts"
 
-interface Meal {
-    idMeal: string;
-    strMeal: string;
-    strMealThumb: string;
-    strInstructions: string;
-    strArea: string;
-    strCategory: string;
-    strTags?: string;
-    strSource?: string;
-    strYoutube?: string;
-    [key: string]: any;
-}
 
 export default function Favorite() {
     const [savedMealsIds, setSavedMealsIds] = useState<string[]>([]);

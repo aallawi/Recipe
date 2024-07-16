@@ -12,11 +12,7 @@ export const metadata: Metadata = {
   description: "Discover a unique interactive experience combining ease of navigation with top-notch service. Explore diverse menus and special offers in a seamless and enjoyable user experience.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children, }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>

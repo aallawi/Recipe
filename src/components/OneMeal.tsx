@@ -4,12 +4,7 @@ import { FC } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import "../../style/globals.css";
-
-interface Meal {
-    idMeal: string;
-    strMeal: string;
-    strMealThumb: string;
-}
+import { Meal } from "../types/index"
 
 interface OneMealProps {
     meal: Meal;

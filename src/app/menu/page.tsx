@@ -8,15 +8,10 @@ import { FadeLoader } from "react-spinners";
 import { IoSearchOutline } from "react-icons/io5";
 import OneMeal from "../../components/OneMeal";
 import "../../../style/globals.css";
+import { Meal } from "../../types/index"
 
 interface Category {
     strCategory: string;
-}
-
-interface Meal {
-    idMeal: string;
-    strMeal: string;
-    strMealThumb: string;
 }
 
 function Menu() {
