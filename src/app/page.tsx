@@ -26,8 +26,8 @@ export default function Home() {
         <div className="flex flex-col justify-around flex-1">
           <p className=" text-center text-[20px] max-w-[600px]">Welcome to <span className=" text-secondary"> "Recipe" </span> where we offer unique and delicious recipes for all tastes. Find everything you need to create delightful dishes.</p>
           <div className="flex justify-center items-center gap-[20px]">
-            <button className="w-full btn-default h-[50px]"><Link href="menu">View Menu</Link></button>
-            <button className="w-full btn-border h-[50px]"><Link href="favorite">My Favorites</Link></button>
+            <Link href="menu" className="w-full text-center btn-default">View Menu</Link>
+            <Link href="favorite" className="w-full text-center btn-border">My Favorites</Link>
           </div>
         </div>
         <span className="clip" />
@@ -42,7 +42,7 @@ export default function Home() {
               <span className="text-[18px]">{item.text}</span>
             </div>
           ))}
-          <button className="w-full btn-default h-[50px] max-w-[400px] mx-auto"><Link href="menu">View all meals</Link></button>
+          <button className="w-full btn-default h-[50px] max-w-[400px] mx-auto mt-[20px]"><Link href="menu">View all meals</Link></button>
         </div>
         <div><Image src="/images/pizza.png" alt="spoon and fork" width={400} height={400} /></div>
       </div>
